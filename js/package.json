@@ -1,0 +1,27 @@
+{
+  "name": "customized-build-msg",
+  "version": "1.0.0",
+  "description": "front-end js for customized build message jenkins plugin",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server ",
+    "build": "webpack"
+  },
+  "author": "cashlalala",
+  "license": "MIT",
+  "devDependencies": {
+    "clean-webpack-plugin": "^0.1.16",
+    "css-loader": "^0.28.0",
+    "extract-text-webpack-plugin": "^2.1.0",
+    "file-loader": "^0.11.1",
+    "jquery": "^3.2.1",
+    "jquery-ui": "^1.12.1",
+    "style-loader": "^0.16.1",
+    "webpack": "^2.4.1",
+    "webpack-uglify-js-plugin": "^1.1.9"
+  },
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "jquery-ui": "^1.12.1"
+  }
+}

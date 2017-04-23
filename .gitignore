@@ -1,0 +1,6 @@
+target/
+.settings/
+work/
+.project
+node_modules/
+.classpath

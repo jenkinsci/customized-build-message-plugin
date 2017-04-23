@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.jenkins-ci.plugins</groupId>
+		<artifactId>plugin</artifactId>
+		<version>2.11</version>
+		<relativePath />
+	</parent>
+
+	<artifactId>customized-build-message</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>hpi</packaging>
+
+	<properties>
+		<jenkins.version>1.625.3</jenkins.version>
+		<maven.exec.skip>true</maven.exec.skip>
+	</properties>
+
+	<name>Customized Build Message Plugin</name>
+	<description>Display the customized messages in build history and status.</description>
+	<url>https://wiki.jenkins-ci.org/display/JENKINS/Customized+Build+Message+Plugin</url>
+
+	<developers>
+		<developer>
+			<id>cashlalala</id>
+			<name>Cash Chang</name>
+			<email>cash924n@gmail.com</email>
+		</developer>
+	</developers>
+
+	<scm>
+		<connection>scm:git:git://github.com/jenkinsci/customized-build-message-plugin.git</connection>
+		<developerConnection>scm:git:git@github.com:jenkinsci/customized-build-message-plugin.git</developerConnection>
+		<url>https://github.com/jenkinsci/customized-build-message-plugin</url>
+	</scm>
+
+	<licenses>
+		<license>
+			<name>MIT License</name>
+			<url>http://opensource.org/licenses/MIT</url>
+		</license>
+	</licenses>
+
+	<repositories>
+		<repository>
+			<id>repo.jenkins-ci.org</id>
+			<url>https://repo.jenkins-ci.org/public/</url>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>repo.jenkins-ci.org</id>
+			<url>https://repo.jenkins-ci.org/public/</url>
+		</pluginRepository>
+	</pluginRepositories>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>exec-maven-plugin</artifactId>
+				<version>1.6.0</version>
+				<configuration>
+					<skip>${maven.exec.skip}</skip>
+					<workingDirectory>${project.bsedir}/js</workingDirectory>
+				</configuration>
+				<executions>
+					<execution>
+						<id>exec-npm-install</id>
+						<phase>generate-resources</phase>
+						<configuration>
+							<executable>npm</executable>
+							<arguments>
+								<argument>install</argument>
+							</arguments>
+						</configuration>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>exec-npm-build</id>
+						<phase>generate-resources</phase>
+						<configuration>
+							<executable>npm</executable>
+							<arguments>
+								<argument>run</argument>
+								<argument>build</argument>
+							</arguments>
+						</configuration>
+						<goals>
+							<goal>exec</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
