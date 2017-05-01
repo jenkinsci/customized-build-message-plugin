@@ -1,0 +1,21 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
+  <f:entry title="Environment Setting">
+    <f:textbox  field="envFile"/>
+  </f:entry>
+  <f:entry title="Success Message">
+    <f:textarea  field="sucMsg"/>
+  </f:entry>
+  <f:entry title="Fail Message">
+    <f:textarea  field="failMsg"/>
+  </f:entry>
+  <f:entry title="Unstable Message">
+    <f:textarea  field="unstableMsg"/>
+  </f:entry>
+  <f:entry title="Abort Message">
+    <f:textarea  field="abortMsg"/>
+  </f:entry>
+  <f:entry title="NotRun Message">
+    <f:textarea  field="notRunMsg"/>
+  </f:entry>
+</j:jelly>
