@@ -4,3 +4,4 @@ work/
 .project
 node_modules/
 .classpath
+js/cached_uglify/

@@ -9,20 +9,20 @@ import hudson.model.BuildBadgeAction;
 @ExportedBean(defaultVisibility=2)
 public class PromptMsgBadgeAction implements BuildBadgeAction {
 
-	private String promptUrl;
+	private String promptMsg;
 	private int buildNo;
 
 	public PromptMsgBadgeAction() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public PromptMsgBadgeAction(String promptUrl, int buildNo) {
-		this.promptUrl = promptUrl;
+	public PromptMsgBadgeAction(String promptMsg, int buildNo) {
+		this.promptMsg = promptMsg;
 		this.buildNo = buildNo;
 	}	
 
-	public String getPromptUrl() {
-		return promptUrl;
+	public String getPromptMsg() {
+		return promptMsg;
 	}
 
 	public int getBuildNo() {

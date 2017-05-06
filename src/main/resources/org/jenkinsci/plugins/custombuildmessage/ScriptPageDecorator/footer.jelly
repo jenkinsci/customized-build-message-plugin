@@ -1,5 +1,5 @@
 <?jelly escape-by-default='true'?>
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" >
  	<link rel="stylesheet" href="${resURL}/plugin/customized-build-message/js/dist/app.css" />
- 	<script type="text/javascript" src="${resURL}/plugin/customized-build-message/js/dist/app.js" ></script>
+ 	<script type="text/javascript" src="${resURL}/plugin/customized-build-message/js/dist/app.js"></script>
 </j:jelly>

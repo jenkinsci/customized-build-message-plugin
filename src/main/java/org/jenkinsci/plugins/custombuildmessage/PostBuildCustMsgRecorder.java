@@ -135,12 +135,14 @@ public class PostBuildCustMsgRecorder extends Recorder {
 				break;
 			}
 
+
+			EnvVars envVars = build.getEnvironment(listener);
 			try {
-				EnvVars envVars = build.getEnvironment(listener);
 				String filePath = substituteEnvVars(envFile, envVars);
 				listenerLogger.println(String.format("File path after variable subsititute : [%s]", filePath));
 
 				if (envFile != null && !envFile.isEmpty()) {
+					
 					FilePath ws = build.getWorkspace();
 					FilePath fp = null;
 					if (ws != null) {
@@ -158,10 +160,10 @@ public class PostBuildCustMsgRecorder extends Recorder {
 
 				}
 
-				msg = substituteEnvVars(msg, envVars);
-
 			} catch (Exception e) {
 				listenerLogger.println(e);
+			} finally {
+				msg = substituteEnvVars(msg, envVars);
 			}
 
 			int buildNo = build.number;
@@ -190,8 +192,7 @@ public class PostBuildCustMsgRecorder extends Recorder {
 
 	@Override
 	public BuildStepMonitor getRequiredMonitorService() {
-		// TODO Auto-generated method stub
-		return null;
+		return BuildStepMonitor.NONE;
 	}
 
 	@Override
