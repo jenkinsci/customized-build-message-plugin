@@ -60,6 +60,7 @@
 	<build>
 		<plugins>
 			<plugin>
+			<!-- turn on only if you have any change in js -->
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>1.6.0</version>
