@@ -135,14 +135,13 @@ public class PostBuildCustMsgRecorder extends Recorder {
 				break;
 			}
 
-
 			EnvVars envVars = build.getEnvironment(listener);
 			try {
 				String filePath = substituteEnvVars(envFile, envVars);
 				listenerLogger.println(String.format("File path after variable subsititute : [%s]", filePath));
 
 				if (envFile != null && !envFile.isEmpty()) {
-					
+
 					FilePath ws = build.getWorkspace();
 					FilePath fp = null;
 					if (ws != null) {
@@ -262,7 +261,7 @@ public class PostBuildCustMsgRecorder extends Recorder {
 		}
 
 		returnStr += inputStr.substring(beginIdx);
-		return returnStr.replaceAll("\n", "<br>");
+		return returnStr;
 	}
 
 	@Extension
