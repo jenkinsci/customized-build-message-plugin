@@ -1,7 +1,7 @@
 <?jelly escape-by-default='true'?>
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
-	<a id="link_${it.buildNo}" href="javascript:void(0)" class="resMsg">{%ID_RESULTMSG%}</a>
+	<a id="link_${it.buildNo}" href="javascript:void(0)" class="resMsg">${%ID_RESULTMSG}</a>
 	<div id="promptMsg_${it.buildNo}" title="Build Number ${it.buildNo}" class="dlg" style="display:none;">
-		<p>${it.promptMsg}</p>
+		<pre>${it.promptMsg}</pre>
 	</div>
 </j:jelly>
