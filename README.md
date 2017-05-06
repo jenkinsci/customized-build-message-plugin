@@ -20,7 +20,7 @@ A plugin for Jenkins CI that customized the prompt message for different build s
 
 ![build](images/parameters.png)
 
-**Result**
+## Result
 
 - build job badge
 
