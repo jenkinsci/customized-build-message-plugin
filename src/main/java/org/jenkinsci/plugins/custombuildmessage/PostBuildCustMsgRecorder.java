@@ -1,14 +1,9 @@
 package org.jenkinsci.plugins.custombuildmessage;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Map;
-import java.util.Properties;
-import java.util.Set;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -40,8 +35,7 @@ public class PostBuildCustMsgRecorder extends Recorder {
 
 	private static final Logger logger = Logger.getLogger(PostBuildCustMsgRecorder.class.getName());
 	private static final Object PLUGINNAME = "[CustomizedPostBuildMessagePlugin]";
-	private PrintStream listenerLogger;
-
+	
 	public String getSucMsg() {
 		return sucMsg;
 	}
@@ -108,27 +102,27 @@ public class PostBuildCustMsgRecorder extends Recorder {
 	@Override
 	public boolean perform(AbstractBuild<?, ?> build, Launcher launcher, BuildListener listener)
 			throws InterruptedException, IOException {
-		listenerLogger = listener.getLogger();
-		listenerLogger.println(PLUGINNAME + " - running...");
 
+		PrintStream listenerLogger = listener.getLogger();
+		listenerLogger.println(PLUGINNAME + " - running...");
 		String msg = "";
 		Result res = build.getResult();
 		if (res != null) {
 			switch (res.ordinal) {
 			case 0:
-				msg = sucMsg;
+				msg = this.sucMsg;
 				break;
 			case 1:
-				msg = unstableMsg;
+				msg = this.unstableMsg;
 				break;
 			case 2:
-				msg = failMsg;
+				msg = this.failMsg;
 				break;
 			case 3:
-				msg = notRunMsg;
+				msg = this.notRunMsg;
 				break;
 			case 4:
-				msg = abortMsg;
+				msg = this.abortMsg;
 				break;
 			default:
 				msg = "The build status is not supported";
@@ -137,10 +131,10 @@ public class PostBuildCustMsgRecorder extends Recorder {
 
 			EnvVars envVars = build.getEnvironment(listener);
 			try {
-				String filePath = substituteEnvVars(envFile, envVars);
+				String filePath = PostBuildCustMsgRecorder.substituteEnvVars(this.envFile, envVars);
 				listenerLogger.println(String.format("File path after variable subsititute : [%s]", filePath));
 
-				if (envFile != null && !envFile.isEmpty()) {
+				if (this.envFile != null && !this.envFile.isEmpty()) {
 
 					FilePath ws = build.getWorkspace();
 					FilePath fp = null;
@@ -152,7 +146,7 @@ public class PostBuildCustMsgRecorder extends Recorder {
 							fp = new FilePath(new File(filePath));
 							listenerLogger.println(String.format("Read local file[%s]", fp.getRemote()));
 						}
-						updateEnvVarsByHand(fp.readToString(), envVars);
+						this.updateEnvVarsByHand(fp.readToString(), envVars, listenerLogger);
 					} else {
 						listenerLogger.println("Fail to get workspace.");
 					}
@@ -162,7 +156,7 @@ public class PostBuildCustMsgRecorder extends Recorder {
 			} catch (Exception e) {
 				listenerLogger.println(e);
 			} finally {
-				msg = substituteEnvVars(msg, envVars);
+				msg = PostBuildCustMsgRecorder.substituteEnvVars(msg, envVars);
 			}
 
 			int buildNo = build.number;
@@ -174,7 +168,7 @@ public class PostBuildCustMsgRecorder extends Recorder {
 		return true;
 	}
 
-	private void updateEnvVarsByHand(String inputStr, EnvVars envVars) {
+	private void updateEnvVarsByHand(String inputStr, EnvVars envVars, PrintStream listenerLogger) {
 		int lineNo = 1;
 		String[] items = inputStr.split("\r\n");
 		for (String item : items) {
@@ -194,45 +188,18 @@ public class PostBuildCustMsgRecorder extends Recorder {
 		return BuildStepMonitor.NONE;
 	}
 
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
 	public BuildStepDescriptor getDescriptor() {
 		// TODO Auto-generated method stub
 		return (DescriptorImpl) super.getDescriptor();
 	}
 
-	// @SuppressWarnings("unused")
-	// private void updateEnvVars(String envFilePath, Map<String, String>
-	// envVars) {
-	// try {
-	// InputStream is = new FileInputStream(envFilePath);
-	// if (null != is) {
-	// updateEnvVars(is, envVars);
-	// }
-	// } catch (FileNotFoundException e) {
-	// listenerLogger.println(String.format("%s %s didn't exist, ingore the
-	// environment variable update",
-	// PLUGINNAME, envFilePath));
-	// } catch (Exception e) {
-	// listenerLogger.println(e);
-	// }
-	// }
-
-	private void updateEnvVars(InputStream fileInputStream, Map<String, String> envVars) throws IOException {
-
-		Properties props = new Properties();
-		props.load(fileInputStream);
-		Set<String> set = props.stringPropertyNames();
-		for (String s : set) {
-			envVars.put(s, props.getProperty(s));
-		}
-
-	}
-
-	private String substituteEnvVars(String inputStr, Map<String, String> map) {
+	public static String substituteEnvVars(String inputStr, Map<String, String> map) {
 		return substituteEnvVars(inputStr, map, false);
 	}
 
-	private String substituteEnvVars(String inputStr, Map<String, String> map, boolean keepOriginSymbol) {
+	public static String substituteEnvVars(String inputStr, Map<String, String> map, boolean keepOriginSymbol) {
 		String returnStr = "";
 		String patternStr = "\\$\\{(\\w+)\\}";
 		Pattern pattern = Pattern.compile(patternStr);
@@ -283,7 +250,7 @@ public class PostBuildCustMsgRecorder extends Recorder {
 		}
 
 		@Override
-		public boolean isApplicable(Class<? extends AbstractProject> jobType) {
+		public boolean isApplicable(@SuppressWarnings("rawtypes") Class<? extends AbstractProject> jobType) {
 			return true;
 		}
 
