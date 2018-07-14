@@ -200,16 +200,22 @@ public class PostBuildCustMsgRecorder extends Recorder {
 		return (DescriptorImpl) super.getDescriptor();
 	}
 
-	private void updateEnvVars(String envFilePath, Map<String, String> envVars) {
-		try {
-			updateEnvVars(new FileInputStream(envFilePath), envVars);
-		} catch (FileNotFoundException e) {
-			listenerLogger.println(String.format("%s %s didn't exist, ingore the environment variable update",
-					PLUGINNAME, envFilePath));
-		} catch (Exception e) {
-			listenerLogger.println(e);
-		}
-	}
+	// @SuppressWarnings("unused")
+	// private void updateEnvVars(String envFilePath, Map<String, String>
+	// envVars) {
+	// try {
+	// InputStream is = new FileInputStream(envFilePath);
+	// if (null != is) {
+	// updateEnvVars(is, envVars);
+	// }
+	// } catch (FileNotFoundException e) {
+	// listenerLogger.println(String.format("%s %s didn't exist, ingore the
+	// environment variable update",
+	// PLUGINNAME, envFilePath));
+	// } catch (Exception e) {
+	// listenerLogger.println(e);
+	// }
+	// }
 
 	private void updateEnvVars(InputStream fileInputStream, Map<String, String> envVars) throws IOException {
 
