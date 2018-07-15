@@ -11,16 +11,18 @@
   "license": "MIT",
   "devDependencies": {
     "clean-webpack-plugin": "^0.1.16",
-    "css-loader": "^0.28.0",
+    "css-loader": "^1.0.0",
     "extract-text-webpack-plugin": "^2.1.0",
-    "file-loader": "^0.11.1",
+    "file-loader": "^1.1.11",
     "jquery": "^3.2.1",
     "jquery-ui": "^1.12.1",
-    "style-loader": "^0.16.1",
+    "style-loader": "^0.21.0",
+    "url-loader": "^1.0.1",
     "webpack": "^2.4.1",
     "webpack-uglify-js-plugin": "^1.1.9"
   },
   "dependencies": {
+    "font-awesome": "^4.7.0",
     "jquery": "^3.2.1",
     "jquery-ui": "^1.12.1"
   }

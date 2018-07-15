@@ -1,6 +1,8 @@
 <?jelly escape-by-default='true'?>
 <j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define" xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form">
-	<a id="link_${it.buildNo}" href="javascript:void(0)" class="resMsg">${%ID_RESULTMSG}</a>
+	<a id="link_${it.buildNo}" href="javascript:void(0)" class="resMsg">
+		<i id="icon_${it.buildNo}" class="fa fa-envelope" aria-hidden="true" title="${%ID_RESULTMSG}"></i>
+	</a>
 	<div id="promptMsg_${it.buildNo}" title="Build Number ${it.buildNo}" class="dlg" style="display:none;">
 		<pre>${it.promptMsg}</pre>
 	</div>
