@@ -1,7 +1,4 @@
 <?jelly escape-by-default='true'?>
-<!--
-  This view is used to render the installed plugins page.
--->
 <div>
-  This plugin allows users to customize messages in build badge & description in build history & status.
+  This plugin allows users to customize messages in build badge &amp; description in build history &amp; status.
 </div>
