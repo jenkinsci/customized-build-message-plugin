@@ -21,21 +21,24 @@ import net.sf.json.JSONObject;
 @Extension
 public class CustomMsgJobProperty extends JobProperty<Job<?, ?>> {
 
-	private String sucMsg;
-	private String failMsg;
-	private String unstableMsg;
-	private String abortMsg;
-	private String notRunMsg;
-	private String envFile;
+	private String briefDesc;
 	private boolean on;
-	private boolean applySuccToAll;
+	private boolean insertOnFinish;
 
-	public boolean isApplySuccToAll() {
-		return applySuccToAll;
+	public boolean isInsertOnFinish() {
+		return insertOnFinish;
 	}
 
-	public void setApplySuccToAll(boolean applySuccToAll) {
-		this.applySuccToAll = applySuccToAll;
+	public void setInsertOnFinish(boolean insertOnFinish) {
+		this.insertOnFinish = insertOnFinish;
+	}
+
+	public String getBriefDesc() {
+		return briefDesc;
+	}
+
+	public void setBriefDesc(String briefDesc) {
+		this.briefDesc = briefDesc;
 	}
 
 	public boolean isOn() {
@@ -47,69 +50,15 @@ public class CustomMsgJobProperty extends JobProperty<Job<?, ?>> {
 	}
 
 	@DataBoundConstructor
-	public CustomMsgJobProperty(String sucMsg, String failMsg, String unstableMsg, String abortMsg, String notRunMsg,
-			String envFile, boolean on, boolean applySuccToAll) {
+	public CustomMsgJobProperty(boolean on, String briefDesc, boolean insertOnFinish) {
 		super();
-		this.sucMsg = sucMsg;
-		this.failMsg = failMsg;
-		this.unstableMsg = unstableMsg;
-		this.abortMsg = abortMsg;
-		this.notRunMsg = notRunMsg;
-		this.envFile = envFile;
 		this.on = on;
-		this.applySuccToAll = applySuccToAll;
+		this.briefDesc = briefDesc;
+		this.insertOnFinish = insertOnFinish;
 	}
 
 	public CustomMsgJobProperty() {
 		super();
-	}
-
-	public String getSucMsg() {
-		return sucMsg;
-	}
-
-	public void setSucMsg(String sucMsg) {
-		this.sucMsg = sucMsg;
-	}
-
-	public String getFailMsg() {
-		return failMsg;
-	}
-
-	public void setFailMsg(String failMsg) {
-		this.failMsg = failMsg;
-	}
-
-	public String getUnstableMsg() {
-		return unstableMsg;
-	}
-
-	public void setUnstableMsg(String unstableMsg) {
-		this.unstableMsg = unstableMsg;
-	}
-
-	public String getAbortMsg() {
-		return abortMsg;
-	}
-
-	public void setAbortMsg(String abortMsg) {
-		this.abortMsg = abortMsg;
-	}
-
-	public String getNotRunMsg() {
-		return notRunMsg;
-	}
-
-	public void setNotRunMsg(String notRunMsg) {
-		this.notRunMsg = notRunMsg;
-	}
-
-	public String getEnvFile() {
-		return envFile;
-	}
-
-	public void setEnvFile(String envFile) {
-		this.envFile = envFile;
 	}
 
 	@Override
@@ -161,7 +110,7 @@ public class CustomMsgJobProperty extends JobProperty<Job<?, ?>> {
 		}
 
 		public String getDisplayName() {
-			return "Customized Prompt Message";
+			return "Customized Build Description";
 		}
 
 	}
